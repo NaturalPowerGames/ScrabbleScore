@@ -12,15 +12,14 @@ public class PlayerNameInputController : MonoBehaviour
 	public void Initialize(int index)
 	{
 		this.index = index;
-		var info = Constants.CurrentGame.PlayerInfos[index];
-		nameInput.text = info.name;
-		tableLocation.SetValueWithoutNotify((int)info.tableLocation);
+		nameInput.text = $"Jugador {index + 1}";
+		tableLocation.SetValueWithoutNotify(0);
 		SetupInputs();
 	}
 
 	private void SetupInputs()
 	{
-		nameInput.onValueChanged.AddListener((x) =>
+		nameInput.onEndEdit.AddListener((x) =>
 		{
 			SetupEvents.OnPlayerNameChangeRequested?.Invoke(index, x);
 		});

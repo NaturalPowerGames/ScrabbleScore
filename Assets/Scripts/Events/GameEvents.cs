@@ -5,7 +5,11 @@ public static class GameEvents
 	/// <summary>
 	/// Player index, turn amount
 	/// </summary>
-	public static Action<int, int> OnTurnStarted;
+	public static Action<int, int> OnTurnStartRequested;
+	/// <summary>
+	/// Player, turn
+	/// </summary>
+	public static Action<PlayerInfo, int> OnTurnStarted;
 	/// <summary>
 	/// Word, score
 	/// </summary>

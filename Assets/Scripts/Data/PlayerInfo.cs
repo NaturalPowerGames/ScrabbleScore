@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 [System.Serializable]
@@ -34,5 +35,10 @@ public class PlayerInfo
     public void AddTurn(string word, int score, float timeSpent)
 	{
         turns.Add(new TurnInfo(word, score, timeSpent));
+	}
+
+	public void AddTurn(TurnInfo turnInfo)
+	{
+		turns.Add(turnInfo);
 	}
 }

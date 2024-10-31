@@ -27,10 +27,10 @@ public class TurnManager : MonoBehaviour
 
 	private void StartNewTurn(int playerIndex, int turn)
 	{
-		currentPlayerIndex = 0;
-		currentTurn = 0;
+		currentPlayerIndex = playerIndex;
+		currentTurn = turn;
 		currentTurnInfo = new TurnInfo();
-		GameEvents.OnTurnStarted?.Invoke(currentPlayerIndex, currentTurn);
+		GameEvents.OnTurnStartRequested?.Invoke(currentPlayerIndex, currentTurn);
 		TimeEvents.OnTimerStartRequested?.Invoke();
 	}
 
@@ -40,7 +40,7 @@ public class TurnManager : MonoBehaviour
 		currentTurnInfo.Score = score;
 		currentTurn++;
 		currentPlayerIndex++;
-		if (currentPlayerIndex >= Constants.CurrentGame.PlayerAmount)
+		if (currentPlayerIndex >= Constants.PlayerAmount)
 		{
 			currentPlayerIndex = 0;
 		}

@@ -29,6 +29,7 @@ public class PlayerNameInputScreenController : UIController
 	{
 		SetupEvents.OnPlayerAmountChanged += OnPlayerAmountChanged;
 	}
+
 	private void OnDisable()
 	{
 		SetupEvents.OnPlayerAmountChanged -= OnPlayerAmountChanged;

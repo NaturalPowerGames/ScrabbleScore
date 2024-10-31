@@ -6,31 +6,53 @@ public class TimeManager : MonoBehaviour
 	private DateTime TimerStart;
 	private bool countingDown, paused, timerStarted;
 	private float secondsInPause;
+	private int minutesPerTurn;
 
 	private void OnEnable()
 	{
 		TimeEvents.OnTimerStartRequested += OnTimerStartRequested;
 		TimeEvents.OnTimerToggleRequested += OnTimerToggleRequested;
+		TimeEvents.OnTimerEndRequested += OnTimerEndRequested;
+		TimeEvents.OnForceTimerToggleRequested += OnForceTimerToggleRequested;
+		SetupEvents.OnMinutesPerTurnChanged += OnMinutesPerTurnChanged;
+	}
+
+	private void OnMinutesPerTurnChanged(int minutesPerTurn)
+	{
+		this.minutesPerTurn = minutesPerTurn;
 	}
 
 	private void OnDisable()
 	{
 		TimeEvents.OnTimerStartRequested -= OnTimerStartRequested;
 		TimeEvents.OnTimerToggleRequested -= OnTimerToggleRequested;
+		TimeEvents.OnTimerEndRequested -= OnTimerEndRequested;
+		TimeEvents.OnForceTimerToggleRequested -= OnForceTimerToggleRequested;
+	}
+
+	private void OnForceTimerToggleRequested(bool paused)
+	{
+		this.paused = paused;
+		TimeEvents.OnTimerToggled?.Invoke(paused);
 	}
 
 	private void OnTimerStartRequested()
 	{
-		TimerStart = DateTime.Now;
+		ResetTimer();
+		TimeEvents.OnTimerToggled?.Invoke(paused);
 		TimeEvents.OnTimerStarted?.Invoke();
-		countingDown = true;
-		timerStarted = true;
 	}
 
-	private void OnTimerToggleRequested(bool active)
+	private void OnTimerToggleRequested()
 	{
-		countingDown = active;
-		TimeEvents.OnTimerToggled?.Invoke(active);
+		countingDown = !countingDown;
+		paused = !countingDown;		
+		TimeEvents.OnTimerToggled?.Invoke(paused);
+	}
+
+	private void OnTimerEndRequested()
+	{
+		EndTimer();
 	}
 
 	private void Update()
@@ -46,17 +68,32 @@ public class TimeManager : MonoBehaviour
 	{
 		if (countingDown)
 		{
-			var secondsLeft = Constants.CurrentGame.TimerMinutes * 60 - differenceSeconds + secondsInPause;
+			var secondsLeft = minutesPerTurn * 60 - differenceSeconds + secondsInPause;
 			if (secondsLeft <= 0)
 			{
-				TimeEvents.OnTimerEnded?.Invoke();
-				countingDown = false;
+				EndTimer();
 			}
 			else
 			{
 				TimeEvents.OnTimerChanged?.Invoke(secondsLeft);
 			}
 		}
+	}
+
+	private void ResetTimer()
+	{
+		TimerStart = DateTime.Now;
+		countingDown = true;
+		timerStarted = true;
+		paused = false;
+		secondsInPause = 0;
+	}
+
+	private void EndTimer()
+	{
+		countingDown = false;
+		paused = false;
+		TimeEvents.OnTimerEnded?.Invoke();
 	}
 
 	private void CalculateSecondsInPause()

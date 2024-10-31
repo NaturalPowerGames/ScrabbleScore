@@ -6,9 +6,9 @@ using System;
 public class GameScreenController : UIController
 {
 	[SerializeField]
-	private Button nextTurnButton, toggleTimerButton;
+	private Button nextTurnButton, toggleTimerButton, endGameButton, endGameConfirmButton, endGameCancelButton;
 	[SerializeField]
-	private GameObject turnInformationInputScreenParent;
+	private GameObject turnInformationInputScreenParent, endGameConfirmationScreen;
 	[SerializeField]
 	private TextMeshProUGUI timerDisplay, turnInfoDisplay;
 	[SerializeField]
@@ -28,19 +28,19 @@ public class GameScreenController : UIController
 		TimeEvents.OnTimerChanged -= OnTimerChanged;
 	}
 
-	private void OnTimerToggled(bool obj)
+	private void OnTurnStarted(PlayerInfo playerInfo, int turn)
 	{
-		throw new NotImplementedException();
+		turnInfoDisplay.text = FormatTurnInfo(playerInfo, turn + 1);
 	}
 
-	private void OnTurnStarted(int playerIndex, int turn)
+	private void OnTimerToggled(bool paused)
 	{
-		turnInfoDisplay.text = FormatTurnInfo(playerIndex, turn +1);
+		toggleTimerButton.image.sprite = paused ? pauseToggleSprites[1] : pauseToggleSprites[0];
 	}
 
-	private string FormatTurnInfo(int playerIndex, int turn)
+	private string FormatTurnInfo(PlayerInfo playerInfo, int turn)
 	{
-		string playerName = Constants.CurrentGame.PlayerInfos[playerIndex].name;
+		string playerName = playerInfo.name;
 		return $"Juega: {playerName}, turno {turn}";
 	}
 
@@ -49,11 +49,30 @@ public class GameScreenController : UIController
 		nextTurnButton.onClick.AddListener(() =>
 		{
 			turnInformationInputScreenParent.SetActive(true);
+			TimeEvents.OnForceTimerToggleRequested?.Invoke(true);
 		});
 
 		toggleTimerButton.onClick.AddListener(() =>
 		{
-			//todo
+			TimeEvents.OnTimerToggleRequested?.Invoke();
+		});
+
+		endGameButton.onClick.AddListener(() =>
+		{
+			endGameConfirmationScreen.SetActive(true);
+			TimeEvents.OnForceTimerToggleRequested?.Invoke(true);
+		});
+
+		endGameCancelButton.onClick.AddListener(() =>
+		{
+			endGameConfirmationScreen.SetActive(false);
+			TimeEvents.OnForceTimerToggleRequested?.Invoke(false);
+		});
+
+		endGameConfirmButton.onClick.AddListener(() =>
+		{
+			GameEvents.OnGameEndRequested?.Invoke();
+			UIEvents.OnScreenChangeRequested?.Invoke(Screens.EndGame);
 		});
 	}
 
@@ -64,6 +83,6 @@ public class GameScreenController : UIController
 	private void OnTimerChanged(float time)
 	{
 		var timeLeft = TimeSpan.FromSeconds(time);
-		timerDisplay.text = $"{timeLeft.Minutes}:{timeLeft.Seconds}";
+		timerDisplay.text = $"{timeLeft.Minutes}:{timeLeft.Seconds.ToString("00")}";
 	}
 }

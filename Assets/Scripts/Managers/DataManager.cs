@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
+	private int currentPlayerIndex;
+	private GameInfo currentGame;
+
 	private void Awake()
 	{
-		Constants.CurrentGame = new GameInfo();
+		currentGame = new GameInfo();
 		OnPlayerAmountChangeRequested(Constants.BasePlayerAmount);
 		OnMinutesPerTurnChangeRequested(Constants.BaseTurnTime);
 	}
@@ -16,6 +19,8 @@ public class DataManager : MonoBehaviour
 		SetupEvents.OnMinutesPerTurnChangeRequested += OnMinutesPerTurnChangeRequested;
 		SetupEvents.OnPlayerNameChangeRequested += OnPlayerNameChangeRequested;
 		SetupEvents.OnPlayerTablePositionChangeRequested += OnPlayerTablePositionChangeRequested;
+		GameEvents.OnTurnStartRequested += OnTurnStartRequested;
+		GameEvents.OnTurnEnded += OnTurnEnded;
 	}
 
 	private void OnDisable()
@@ -24,27 +29,41 @@ public class DataManager : MonoBehaviour
 		SetupEvents.OnMinutesPerTurnChangeRequested -= OnMinutesPerTurnChangeRequested;
 		SetupEvents.OnPlayerNameChangeRequested -= OnPlayerNameChangeRequested;
 		SetupEvents.OnPlayerTablePositionChangeRequested -= OnPlayerTablePositionChangeRequested;
-	}	
+		GameEvents.OnTurnStartRequested -= OnTurnStartRequested;
+		GameEvents.OnTurnEnded -= OnTurnEnded;
+	}
+
+	private void OnTurnStartRequested(int playerIndex, int turn)
+	{
+		currentPlayerIndex = playerIndex;
+		GameEvents.OnTurnStarted?.Invoke(currentGame.PlayerInfos[currentPlayerIndex], turn);
+	}
+
+	private void OnTurnEnded(TurnInfo turnInfo)
+	{
+		currentGame.AddTurnToPlayer(currentPlayerIndex, turnInfo);
+	}
 
 	private void OnPlayerAmountChangeRequested(int playerAmount)
 	{
-		Constants.CurrentGame.ChangePlayerAmount(playerAmount);
+		currentGame.ChangePlayerAmount(playerAmount);
+		Constants.PlayerAmount = currentGame.PlayerAmount;
 	}
 
-	private void OnMinutesPerTurnChangeRequested(int obj)
+	private void OnMinutesPerTurnChangeRequested(int minutes)
 	{
-		Constants.CurrentGame.TimerMinutes = obj;
+		currentGame.TimerMinutes = minutes;
 	}
 
 	private void OnPlayerNameChangeRequested(int index, string newName)
 	{
-		Constants.CurrentGame.UpdatePlayerInfo(index, newName);
-		SetupEvents.OnPlayerInfoChanged?.Invoke(Constants.CurrentGame.PlayerInfos[index]);
+		currentGame.UpdatePlayerInfo(index, newName);
+		SetupEvents.OnPlayerInfoChanged?.Invoke(currentGame.PlayerInfos[index]);
 	}
 
 	private void OnPlayerTablePositionChangeRequested(int index, TablePositions position)
 	{
-		Constants.CurrentGame.UpdatePlayerInfo(index, position);
-		SetupEvents.OnPlayerInfoChanged?.Invoke(Constants.CurrentGame.PlayerInfos[index]);
+		currentGame.UpdatePlayerInfo(index, position);
+		SetupEvents.OnPlayerInfoChanged?.Invoke(currentGame.PlayerInfos[index]);
 	}
 }

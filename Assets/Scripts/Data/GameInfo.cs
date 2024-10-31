@@ -53,4 +53,9 @@ public class GameInfo
 		}
 		SetupEvents.OnPlayerAmountChanged?.Invoke(PlayerAmount);
 	}
+
+	internal void AddTurnToPlayer(int playerIndex, TurnInfo turnInfo)
+	{
+		playerInfos[playerIndex].AddTurn(turnInfo);
+	}
 }
