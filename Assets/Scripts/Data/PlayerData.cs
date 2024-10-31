@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class PlayerInfo
+[Serializable]
+public class PlayerData
 {
     public string name;
     public TablePositions tableLocation;
-    private List<TurnInfo> turns = new List<TurnInfo>();
+    private List<TurnData> turns = new List<TurnData>();
+	private int differential;
 
-    public PlayerInfo(int index)
+    public PlayerData(int index)
 	{
 		name = $"Jugador {index+1}"; //localization?
 	}
@@ -28,17 +29,28 @@ public class PlayerInfo
 			{
 				score += turns[i].Score;
 			}
+			score += differential;
 			return score;
 		}
 	}
 
     public void AddTurn(string word, int score, float timeSpent)
 	{
-        turns.Add(new TurnInfo(word, score, timeSpent));
+        turns.Add(new TurnData(word, score, timeSpent));
 	}
 
-	public void AddTurn(TurnInfo turnInfo)
+	public void ClearTurns()
+	{
+		turns.Clear();
+	}
+
+	public void AddTurn(TurnData turnInfo)
 	{
 		turns.Add(turnInfo);
+	}
+
+	public void UpdateDifferential(int differential)
+	{
+		this.differential = differential;
 	}
 }

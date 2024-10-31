@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-	private DateTime TimerStart;
-	private bool countingDown, paused, timerStarted;
+	private DateTime timerStart;
+	private bool countingDown, paused, timerStarted, hasLostFocus;
 	private float secondsInPause;
 	private int minutesPerTurn;
 
@@ -17,17 +17,18 @@ public class TimeManager : MonoBehaviour
 		SetupEvents.OnMinutesPerTurnChanged += OnMinutesPerTurnChanged;
 	}
 
-	private void OnMinutesPerTurnChanged(int minutesPerTurn)
-	{
-		this.minutesPerTurn = minutesPerTurn;
-	}
-
 	private void OnDisable()
 	{
 		TimeEvents.OnTimerStartRequested -= OnTimerStartRequested;
 		TimeEvents.OnTimerToggleRequested -= OnTimerToggleRequested;
 		TimeEvents.OnTimerEndRequested -= OnTimerEndRequested;
 		TimeEvents.OnForceTimerToggleRequested -= OnForceTimerToggleRequested;
+		SetupEvents.OnMinutesPerTurnChanged -= OnMinutesPerTurnChanged;
+	}
+
+	private void OnMinutesPerTurnChanged(int minutesPerTurn)
+	{
+		this.minutesPerTurn = minutesPerTurn;
 	}
 
 	private void OnForceTimerToggleRequested(bool paused)
@@ -58,7 +59,7 @@ public class TimeManager : MonoBehaviour
 	private void Update()
 	{
 		if (!timerStarted) return;
-		var differenceSeconds = (DateTime.Now - TimerStart).Seconds;
+		var differenceSeconds = (DateTime.Now - timerStart).Seconds;
 		TimerCountdown(differenceSeconds);
 		CalculateSecondsInPause();
 		TimeEvents.OnTimeSpentInTurnChanged?.Invoke(differenceSeconds - secondsInPause);
@@ -82,7 +83,7 @@ public class TimeManager : MonoBehaviour
 
 	private void ResetTimer()
 	{
-		TimerStart = DateTime.Now;
+		timerStart = DateTime.Now;
 		countingDown = true;
 		timerStarted = true;
 		paused = false;
@@ -101,6 +102,26 @@ public class TimeManager : MonoBehaviour
 		if (paused)
 		{
 			secondsInPause += Time.deltaTime;
+		}
+	}
+
+	private void OnApplicationFocus(bool focus)
+	{
+		if (focus && hasLostFocus)
+		{
+			hasLostFocus = false;
+			if (timerStarted)
+			{
+				timerStart = DateTime.Parse(PlayerPrefs.GetString("TimerStartTime"));
+			}
+		}
+		else
+		{
+			hasLostFocus = true;
+			if (timerStarted)
+			{
+				PlayerPrefs.SetString("TimerStartTime", timerStart.ToString());
+			}
 		}
 	}
 }

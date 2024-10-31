@@ -4,23 +4,23 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
 	private int currentPlayerIndex, currentTurn;
-	private TurnInfo currentTurnInfo;
+	private TurnData currentTurnInfo;
 
 	private void OnEnable()
 	{
-		GameEvents.OnGameStartRequested += OnGameStartRequested;
+		GameEvents.OnGameStarted += OnGameStarted;
 		GameEvents.OnTurnEndRequested += OnTurnEndRequested;
 		TimeEvents.OnTimeSpentInTurnChanged += OnTimeSpentInTurnChanged;
 	}
 
 	private void OnDisable()
 	{
-		GameEvents.OnGameStartRequested -= OnGameStartRequested;
+		GameEvents.OnGameStarted -= OnGameStarted;
 		GameEvents.OnTurnEndRequested -= OnTurnEndRequested;
 		TimeEvents.OnTimeSpentInTurnChanged -= OnTimeSpentInTurnChanged;
 	}
 
-	private void OnGameStartRequested()
+	private void OnGameStarted(PlayerData[] players)
 	{
 		StartNewTurn(0, 0);
 	}
@@ -29,7 +29,7 @@ public class TurnManager : MonoBehaviour
 	{
 		currentPlayerIndex = playerIndex;
 		currentTurn = turn;
-		currentTurnInfo = new TurnInfo();
+		currentTurnInfo = new TurnData();
 		GameEvents.OnTurnStartRequested?.Invoke(currentPlayerIndex, currentTurn);
 		TimeEvents.OnTimerStartRequested?.Invoke();
 	}

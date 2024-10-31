@@ -1,18 +1,18 @@
 [System.Serializable]
-public class TurnInfo
+public class TurnData
 {
 	public string Word;
 	public int Score;
 	public float TimeSpent;
 
-	public TurnInfo(string word, int score, float timeSpent)
+	public TurnData(string word, int score, float timeSpent)
 	{
 		this.Word = word;
 		this.Score = score;
 		this.TimeSpent = timeSpent;
 	}
 
-	public TurnInfo()
+	public TurnData()
 	{
 
 	}

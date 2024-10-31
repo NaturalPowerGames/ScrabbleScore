@@ -13,12 +13,15 @@ public class GameScreenController : UIController
 	private TextMeshProUGUI timerDisplay, turnInfoDisplay;
 	[SerializeField]
 	private Sprite[] pauseToggleSprites;
+	[SerializeField]
+	private GameplayScoreboardController scoreboard;
 
 	private void OnEnable()
 	{
 		TimeEvents.OnTimerChanged += OnTimerChanged;
 		TimeEvents.OnTimerToggled += OnTimerToggled;
 		GameEvents.OnTurnStarted += OnTurnStarted;
+		GameEvents.OnGameStarted += OnGameStarted;
 	}
 
 	private void OnDisable()
@@ -26,9 +29,16 @@ public class GameScreenController : UIController
 		GameEvents.OnTurnStarted -= OnTurnStarted;
 		TimeEvents.OnTimerToggled -= OnTimerToggled;
 		TimeEvents.OnTimerChanged -= OnTimerChanged;
+		GameEvents.OnGameStarted -= OnGameStarted;
 	}
 
-	private void OnTurnStarted(PlayerInfo playerInfo, int turn)
+	private void OnGameStarted(PlayerData[] players)
+	{
+		endGameConfirmationScreen.SetActive(false);
+		scoreboard.Initialize(players);
+	}
+
+	private void OnTurnStarted(PlayerData playerInfo, int turn)
 	{
 		turnInfoDisplay.text = FormatTurnInfo(playerInfo, turn + 1);
 	}
@@ -38,7 +48,7 @@ public class GameScreenController : UIController
 		toggleTimerButton.image.sprite = paused ? pauseToggleSprites[1] : pauseToggleSprites[0];
 	}
 
-	private string FormatTurnInfo(PlayerInfo playerInfo, int turn)
+	private string FormatTurnInfo(PlayerData playerInfo, int turn)
 	{
 		string playerName = playerInfo.name;
 		return $"Juega: {playerName}, turno {turn}";

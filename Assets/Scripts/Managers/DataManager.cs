@@ -4,13 +4,11 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
 	private int currentPlayerIndex;
-	private GameInfo currentGame;
+	private GameData currentGame;
 
-	private void Awake()
+	private void Start()
 	{
-		currentGame = new GameInfo();
-		OnPlayerAmountChangeRequested(Constants.BasePlayerAmount);
-		OnMinutesPerTurnChangeRequested(Constants.BaseTurnTime);
+		BaseSetupGame();
 	}
 
 	private void OnEnable()
@@ -21,6 +19,10 @@ public class DataManager : MonoBehaviour
 		SetupEvents.OnPlayerTablePositionChangeRequested += OnPlayerTablePositionChangeRequested;
 		GameEvents.OnTurnStartRequested += OnTurnStartRequested;
 		GameEvents.OnTurnEnded += OnTurnEnded;
+		GameEvents.OnGameStartRequested += OnGameStartRequested;
+		GameEvents.OnGameEndRequested += OnGameEndRequested;
+		GameEvents.OnDifferentialScoresUpdateRequested += OnDifferentialScoresUpdateRequested;
+		GameEvents.OnGameResetRequested += OnGameResetRequested;
 	}
 
 	private void OnDisable()
@@ -31,17 +33,46 @@ public class DataManager : MonoBehaviour
 		SetupEvents.OnPlayerTablePositionChangeRequested -= OnPlayerTablePositionChangeRequested;
 		GameEvents.OnTurnStartRequested -= OnTurnStartRequested;
 		GameEvents.OnTurnEnded -= OnTurnEnded;
+		GameEvents.OnGameStartRequested -= OnGameStartRequested;
+		GameEvents.OnGameEndRequested -= OnGameEndRequested;
+		GameEvents.OnDifferentialScoresUpdateRequested -= OnDifferentialScoresUpdateRequested;
+		GameEvents.OnGameResetRequested -= OnGameResetRequested;
 	}
 
-	private void OnTurnStartRequested(int playerIndex, int turn)
+	private void BaseSetupGame()
 	{
-		currentPlayerIndex = playerIndex;
-		GameEvents.OnTurnStarted?.Invoke(currentGame.PlayerInfos[currentPlayerIndex], turn);
+		currentGame = new GameData();
+		OnPlayerAmountChangeRequested(Constants.BasePlayerAmount);
+		OnMinutesPerTurnChangeRequested(Constants.BaseTurnTime);
 	}
 
-	private void OnTurnEnded(TurnInfo turnInfo)
+	private void ResetGame()
 	{
-		currentGame.AddTurnToPlayer(currentPlayerIndex, turnInfo);
+		currentGame = new GameData(currentGame);
+		OnGameStartRequested();
+	}
+
+	private void OnGameResetRequested(bool setup)
+	{
+		if (setup)
+		{
+			BaseSetupGame();
+			UIEvents.OnScreenChangeRequested?.Invoke(Screens.BasicSetup);
+		}
+		else
+		{
+			ResetGame();
+			UIEvents.OnScreenChangeRequested?.Invoke(Screens.Game);
+		}
+	}
+
+	private void OnDifferentialScoresUpdateRequested(int[] differentials)
+	{
+		for (int i = 0; i < currentGame.Players.Count; i++)
+		{
+			currentGame.Players[i].UpdateDifferential(differentials[i]);
+		}
+		GameEvents.OnGameEnded?.Invoke(currentGame.Players.ToArray(), currentGame.CurrentScoresOrderedByDescending());
 	}
 
 	private void OnPlayerAmountChangeRequested(int playerAmount)
@@ -58,12 +89,44 @@ public class DataManager : MonoBehaviour
 	private void OnPlayerNameChangeRequested(int index, string newName)
 	{
 		currentGame.UpdatePlayerInfo(index, newName);
-		SetupEvents.OnPlayerInfoChanged?.Invoke(currentGame.PlayerInfos[index]);
+		SetupEvents.OnPlayerInfoChanged?.Invoke(currentGame.Players[index]);
 	}
 
 	private void OnPlayerTablePositionChangeRequested(int index, TablePositions position)
 	{
 		currentGame.UpdatePlayerInfo(index, position);
-		SetupEvents.OnPlayerInfoChanged?.Invoke(currentGame.PlayerInfos[index]);
+		SetupEvents.OnPlayerInfoChanged?.Invoke(currentGame.Players[index]);
+	}
+
+	private void OnGameStartRequested()
+	{
+		GameEvents.OnGameStarted?.Invoke(currentGame.Players.ToArray());
+	}
+
+	private void OnTurnStartRequested(int playerIndex, int turn)
+	{
+		currentPlayerIndex = playerIndex;
+		GameEvents.OnTurnStarted?.Invoke(currentGame.Players[currentPlayerIndex], turn);
+	}
+
+	private void OnTurnEnded(TurnData turnInfo)
+	{
+		currentGame.AddTurnToPlayer(currentPlayerIndex, turnInfo);
+		GameEvents.OnScoresUpdated?.Invoke(CalculatePlayerScores());
+	}
+
+	private void OnGameEndRequested()
+	{
+		GameEvents.OnGameEnded?.Invoke(currentGame.Players.ToArray(),currentGame.CurrentScoresOrderedByDescending());
+	}
+
+	private ScoreData[] CalculatePlayerScores()
+	{
+		ScoreData[] scores = new ScoreData[currentGame.PlayerAmount];
+		for (int i = 0; i < scores.Length; i++)
+		{
+			scores[i] = new ScoreData(currentGame.Players[i].name, currentGame.Players[i].Score);
+		}
+		return scores;
 	}
 }

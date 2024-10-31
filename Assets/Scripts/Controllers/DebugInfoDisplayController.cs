@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class DebugInfoDisplayController : MonoBehaviour
 {
+	[SerializeField]
+	private bool showLogs;
+
 	private void OnEnable()
 	{
 		SetupEvents.OnPlayerInfoChanged += OnPlayerInfoChanged;
@@ -15,13 +18,15 @@ public class DebugInfoDisplayController : MonoBehaviour
 		GameEvents.OnTurnEnded -= OnTurnEnded;
 	}
 
-	private void OnTurnEnded(TurnInfo obj)
+	private void OnTurnEnded(TurnData obj)
 	{
+		if(showLogs)
 		Debug.Log(obj.ToString());
 	}
 
-	private void OnPlayerInfoChanged(PlayerInfo info)
+	private void OnPlayerInfoChanged(PlayerData info)
 	{
+		if(showLogs)
 		Debug.Log(info.ToString());
 	}
 }

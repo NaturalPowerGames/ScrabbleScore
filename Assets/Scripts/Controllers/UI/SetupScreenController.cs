@@ -9,6 +9,15 @@ public class SetupScreenController : UIController
     [SerializeField]
     private Button goToGameButton, inputPlayerNamesButton;
 
+	public override void Toggle(bool active)
+	{
+		base.Toggle(active);
+		if (active)
+		{
+			timeInput.SetValueWithoutNotify(0);
+			playersInput.SetValueWithoutNotify(0);
+		}
+	}
 	protected override void SetupButtons()
 	{
 		goToGameButton.onClick.AddListener(() =>
@@ -30,7 +39,7 @@ public class SetupScreenController : UIController
 		});
 		timeInput.onValueChanged.AddListener((x) =>
 		{
-			SetupEvents.OnMinutesPerTurnChangeRequested?.Invoke(int.Parse(playersInput.options[x].text));
+			SetupEvents.OnMinutesPerTurnChangeRequested?.Invoke(int.Parse(timeInput.options[x].text));
 		});
 	}
 }
