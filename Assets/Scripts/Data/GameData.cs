@@ -6,7 +6,9 @@ using System.Linq;
 public class GameData
 {
 	private Guid matchID;
+	public Guid MatchID => matchID;
 	private DateTime matchDate;
+	public DateTime MatchDate=> matchDate;
 	private int timerMinutes, totalTime;
 	public int TimerMinutes 
 	{

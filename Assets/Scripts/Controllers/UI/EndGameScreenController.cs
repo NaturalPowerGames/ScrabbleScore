@@ -6,7 +6,7 @@ using System;
 public class EndGameScreenController : UIController
 {
 	[SerializeField]
-	private Button playAgainButton, setupAgainButton, addDifferentialPointsButton;
+	private Button playAgainButton, setupAgainButton, addDifferentialPointsButton, goToDataScreenButton;
 	[SerializeField]
 	private TextMeshProUGUI resultDisplay;
 	[SerializeField]
@@ -29,6 +29,10 @@ public class EndGameScreenController : UIController
 		addDifferentialPointsButton.onClick.AddListener(() =>
 		{
 			differentialPointsScreen.gameObject.SetActive(true);
+		});
+		goToDataScreenButton.onClick.AddListener(() =>
+		{
+			UIEvents.OnScreenChangeRequested?.Invoke(Screens.Data);
 		});
 	}
 

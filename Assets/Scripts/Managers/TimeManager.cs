@@ -59,13 +59,13 @@ public class TimeManager : MonoBehaviour
 	private void Update()
 	{
 		if (!timerStarted) return;
-		var differenceSeconds = (DateTime.Now - timerStart).Seconds;
-		TimerCountdown(differenceSeconds);
+		var differenceSeconds = (DateTime.Now - timerStart).TotalSeconds;
+		TimerCountdown((float)differenceSeconds);
 		CalculateSecondsInPause();
-		TimeEvents.OnTimeSpentInTurnChanged?.Invoke(differenceSeconds - secondsInPause);
+		TimeEvents.OnTimeSpentInTurnChanged?.Invoke((float)(differenceSeconds - secondsInPause));
 	}
 
-	private void TimerCountdown(int differenceSeconds)
+	private void TimerCountdown(float differenceSeconds)
 	{
 		if (countingDown)
 		{

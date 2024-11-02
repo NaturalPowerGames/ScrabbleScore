@@ -93,6 +93,7 @@ public class GameScreenController : UIController
 	private void OnTimerChanged(float time)
 	{
 		var timeLeft = TimeSpan.FromSeconds(time);
+		timerDisplay.color = time > 120 ? Color.white : time > 60 ? Color.yellow : Color.red;
 		timerDisplay.text = $"{timeLeft.Minutes}:{timeLeft.Seconds.ToString("00")}";
 	}
 }

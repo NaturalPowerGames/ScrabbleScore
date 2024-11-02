@@ -5,6 +5,12 @@ public class DataManager : MonoBehaviour
 {
 	private int currentPlayerIndex;
 	private GameData currentGame;
+	private SaverLoader saverLoader;
+
+	private void Awake()
+	{
+		saverLoader = new SaverLoader();
+	}
 
 	private void Start()
 	{
@@ -23,6 +29,8 @@ public class DataManager : MonoBehaviour
 		GameEvents.OnGameEndRequested += OnGameEndRequested;
 		GameEvents.OnDifferentialScoresUpdateRequested += OnDifferentialScoresUpdateRequested;
 		GameEvents.OnGameResetRequested += OnGameResetRequested;
+		DataEvents.OnSaveGameRequested += OnSaveGameRequested;
+		DataEvents.OnLoadAllGamesForUserRequested += OnLoadAllGamesForUserRequested;
 	}
 
 	private void OnDisable()
@@ -37,6 +45,20 @@ public class DataManager : MonoBehaviour
 		GameEvents.OnGameEndRequested -= OnGameEndRequested;
 		GameEvents.OnDifferentialScoresUpdateRequested -= OnDifferentialScoresUpdateRequested;
 		GameEvents.OnGameResetRequested -= OnGameResetRequested;
+		DataEvents.OnSaveGameRequested -= OnSaveGameRequested;
+		DataEvents.OnLoadAllGamesForUserRequested -= OnLoadAllGamesForUserRequested;
+	}
+
+	private void OnLoadAllGamesForUserRequested(string user)
+	{
+		GameData[] games = saverLoader.LoadGamesFromLocalStorage(user);
+		DataEvents.OnGamesLoadedForUser?.Invoke(games);
+	}
+
+	private void OnSaveGameRequested()
+	{
+		saverLoader.SaveGame(currentGame);
+		DataEvents.OnGameSaved?.Invoke();
 	}
 
 	private void BaseSetupGame()
