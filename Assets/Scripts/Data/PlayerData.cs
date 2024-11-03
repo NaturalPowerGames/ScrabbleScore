@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class PlayerData
 {
     public string name;
     public TablePositions tableLocation;
+	[SerializeField]
     private List<TurnData> turns = new List<TurnData>();
+	[SerializeField]
 	private int differential;
 
     public PlayerData(int index)
@@ -34,7 +37,20 @@ public class PlayerData
 		}
 	}
 
-    public void AddTurn(string word, int score, float timeSpent)
+	public float AverageTurnTime 
+	{
+		get
+		{
+			float totalTurnTime = 0;
+			for (int i = 0; i < turns.Count; i++)
+			{
+				totalTurnTime += turns[i].TimeSpent;
+			}
+			return totalTurnTime / turns.Count;
+		}
+	}
+
+	public void AddTurn(string word, int score, float timeSpent)
 	{
         turns.Add(new TurnData(word, score, timeSpent));
 	}

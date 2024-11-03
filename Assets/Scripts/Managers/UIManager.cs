@@ -4,6 +4,7 @@ public class UIManager : MonoBehaviour
 {
 	[SerializeField, EnumNamedArray(typeof(Screens))]
 	private UIController[] screens;
+	private Screens previousScreen, currentScreen;
 
 	private void Awake()
 	{
@@ -23,7 +24,14 @@ public class UIManager : MonoBehaviour
 	private void OnScreenChangeRequested(Screens screen)
 	{
 		DisableAllScreens();
-		screens[(int)screen].Toggle(true);
+		var requiredScreen = screen;
+		if(screen == Screens.Back)
+		{
+			requiredScreen = previousScreen;
+		}
+		screens[(int)requiredScreen].Toggle(true);
+		previousScreen = currentScreen;
+		currentScreen = requiredScreen;
 	}
 
 	private void DisableAllScreens()

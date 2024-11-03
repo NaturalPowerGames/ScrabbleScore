@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 [Serializable]
 public class GameData
 {
+	[SerializeField]
 	private Guid matchID;
 	public Guid MatchID => matchID;
+	[SerializeField]
 	private DateTime matchDate;
 	public DateTime MatchDate=> matchDate;
+	[SerializeField]
 	private int timerMinutes, totalTime;
 	public int TimerMinutes 
 	{
@@ -23,20 +27,20 @@ public class GameData
 	public int PlayerAmount => players.Count;
 
 	public float TotalTime => totalTime;
-
+	[SerializeField]
 	private List<PlayerData> players = new List<PlayerData>();
 
 	public List<PlayerData> Players => players;
 
 	public GameData()
 	{
-		matchID = new Guid();
+		matchID = Guid.NewGuid();
 		matchDate = DateTime.Now;
 	}
 
 	public GameData(GameData gameData)
 	{
-		matchID = new Guid();
+		matchID = Guid.NewGuid();
 		matchDate = DateTime.Now;
 		TimerMinutes = gameData.TimerMinutes;
 		players = new List<PlayerData>(gameData.Players);

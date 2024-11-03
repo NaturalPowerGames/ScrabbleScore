@@ -53,6 +53,6 @@ public class PlayerNameInputScreenController : UIController
 
 	private void DeleteCurrentChildren()
 	{
-		inputsParent.DeleteAllChildren();
+		inputsParent.RemoveAllChildren();
 	}
 }

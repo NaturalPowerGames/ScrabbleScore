@@ -10,8 +10,7 @@ public class SaverLoader
 
 	public SaverLoader()
 	{
-		baseSaveLocation = Path.Combine(Application.persistentDataPath, "/Saves");
-		Debug.Log(baseSaveLocation);
+		baseSaveLocation = Application.persistentDataPath + "/Saves";
 		if (!Directory.Exists(baseSaveLocation))
 		{
 			Directory.CreateDirectory(baseSaveLocation);

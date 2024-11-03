@@ -72,7 +72,7 @@ public class EndGameScreenController : UIController
 
 	private void GenerateScoreboard(ScoreData[] scores)
 	{
-		scoreboardParent.DeleteAllChildren();
+		scoreboardParent.RemoveAllChildren();
 		for (int i = 0; i < scores.Length; i++)
 		{
 			int index = i;

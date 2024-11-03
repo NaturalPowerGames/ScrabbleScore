@@ -7,7 +7,7 @@ public class SetupScreenController : UIController
     [SerializeField]
     private TMP_Dropdown timeInput, playersInput;
     [SerializeField]
-    private Button goToGameButton, inputPlayerNamesButton;
+    private Button goToGameButton, inputPlayerNamesButton, goToDataScreenButton;
 
 	public override void Toggle(bool active)
 	{
@@ -28,6 +28,10 @@ public class SetupScreenController : UIController
 		inputPlayerNamesButton.onClick.AddListener(() =>
 		{
 			UIEvents.OnScreenChangeRequested?.Invoke(Screens.PlayerNameInput);
+		});
+		goToDataScreenButton.onClick.AddListener(() =>
+		{
+			UIEvents.OnScreenChangeRequested?.Invoke(Screens.Data);
 		});
 	}
 

@@ -44,7 +44,7 @@ public class DifferentialPointsScreenController : MonoBehaviour
 
 	public void Initialize(PlayerData[] playerInfos)
 	{
-		differentialInputsParent.DeleteAllChildren();
+		differentialInputsParent.RemoveAllChildren();
 		differentialInputs = new DifferentialInputController[playerInfos.Length];
 		for (int i = 0; i < differentialInputs.Length; i++)
 		{

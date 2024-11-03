@@ -4,5 +4,6 @@ public enum Screens
     PlayerNameInput,
     Game,
     EndGame,
-    Data
+    Data,
+    Back
 }

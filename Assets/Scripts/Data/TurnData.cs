@@ -1,3 +1,5 @@
+using System;
+
 [System.Serializable]
 public class TurnData
 {
@@ -9,7 +11,9 @@ public class TurnData
 	{
 		this.Word = word;
 		this.Score = score;
-		this.TimeSpent = timeSpent;
+		if (timeSpent < 1) timeSpent = 1;
+		float truncatedTime = (float)Math.Truncate(timeSpent * 100) / 100;
+		TimeSpent = truncatedTime;
 	}
 
 	public TurnData()

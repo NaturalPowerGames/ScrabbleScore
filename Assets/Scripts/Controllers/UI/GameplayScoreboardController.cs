@@ -28,7 +28,7 @@ public class GameplayScoreboardController : MonoBehaviour
 
 	public void Initialize(PlayerData[] players)
 	{
-		transform.DeleteAllChildren();
+		transform.RemoveAllChildren();
 		scoreDisplays = new MiniPlayerScoreDisplayController[players.Length];
 		for (int i = 0; i < players.Length; i++)
 		{

@@ -6,16 +6,16 @@ using DG.Tweening;
 public class GameRecordsScreenController : UIController
 {
 	[SerializeField]
-	private Button loadGameRecordsForUserButton, saveGameButton;
+	private Button loadGameRecordsForUserButton, saveGameButton, backButton;
 	[SerializeField]
 	private TMP_InputField usernameInput;
 	[SerializeField]
 	private TextMeshProUGUI gameSavedText;
 	[SerializeField]
-	private TMP_Dropdown gameChoiceDropdown;
-	[SerializeField]
 	private Transform gameParent;
-
+	[SerializeField]
+	private GameRecordDisplayController recordPrefab;
+	
 	private void OnEnable()
 	{
 		DataEvents.OnGamesLoadedForUser += OnGamesLoadedForUser;
@@ -52,6 +52,10 @@ public class GameRecordsScreenController : UIController
 		{
 			DataEvents.OnSaveGameRequested?.Invoke();
 		});
+		backButton.onClick.AddListener(() =>
+		{
+			UIEvents.OnScreenChangeRequested?.Invoke(Screens.Back);
+		});
 	}
 
 	protected override void SetupInputs()
@@ -60,6 +64,11 @@ public class GameRecordsScreenController : UIController
 
 	private void DisplayLoadedGames(GameData[] datas)
 	{
-
+		gameParent.RemoveAllChildren();
+		for (int i = 0; i < datas.Length; i++)
+		{
+			var recordDisplay = Instantiate(recordPrefab, gameParent);
+			recordDisplay.Initialize(datas[i]);
+		}
 	}
 }
