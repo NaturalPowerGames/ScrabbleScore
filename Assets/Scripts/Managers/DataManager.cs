@@ -6,9 +6,14 @@ public class DataManager : MonoBehaviour
 	private int currentPlayerIndex;
 	private GameData currentGame;
 	private SaverLoader saverLoader;
+	private PlayfabSaverLoader playfab;
+
+	[SerializeField]
+	private bool useOnlineServices;
 
 	private void Awake()
 	{
+		playfab = new PlayfabSaverLoader();
 		saverLoader = new SaverLoader();
 	}
 
@@ -51,12 +56,23 @@ public class DataManager : MonoBehaviour
 
 	private void OnLoadAllGamesForUserRequested(string user)
 	{
-		GameData[] games = saverLoader.LoadGamesFromLocalStorage(user);
-		DataEvents.OnGamesLoadedForUser?.Invoke(games);
+		if (useOnlineServices)
+		{
+			playfab.DownloadAllGameData(user);
+		}
+		else
+		{
+			var games = saverLoader.LoadGamesFromLocalStorage(user);
+			DataEvents.OnGamesLoadedForUser?.Invoke(games);
+		}
 	}
 
 	private void OnSaveGameRequested()
 	{
+		if (useOnlineServices)
+		{
+			playfab.UploadToPlayFab(currentGame);
+		}
 		saverLoader.SaveGame(currentGame);
 		DataEvents.OnGameSaved?.Invoke();
 	}
@@ -139,6 +155,7 @@ public class DataManager : MonoBehaviour
 
 	private void OnGameEndRequested()
 	{
+		currentGame.OnGameEnded();
 		GameEvents.OnGameEnded?.Invoke(currentGame.Players.ToArray(),currentGame.CurrentScoresOrderedByDescending());
 	}
 

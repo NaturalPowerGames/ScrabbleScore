@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
+  m_Name: PlayFabEditorPrefsSO
+  m_EditorClassIdentifier: 
+  DevAccountEmail: lopezmramon@gmail.com
+  DevAccountToken: jh51ix5s495gkbw3yfy1gm963kjsj4xwmdfha13hdqk1e87i9pdyobghep8f6y8gn6433fzcjx9d5c9y7ag54uudmowb6adboxuk5go9771iyqwfpz7i7wkskhu5q6keiifdbwqnyocbdw7xg8c4amtgafiyh6kuyizu84twyy1swiggjt3uosjyn3kqjfhxwhym4x8p
+  AadAuthorization: 
+  SelectedStudio: Natural Power Games
+  SdkPath: Assets/PlayFabSDK
+  EdExPath: 
+  LocalCloudScriptPath: 
+  PanelIsShown: 0
+  curMainMenuIdx: 3
+  curSubMenuIdx: 0
