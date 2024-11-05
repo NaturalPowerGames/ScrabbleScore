@@ -7532,7 +7532,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -7748,7 +7748,7 @@ GameObject:
   - component: {fileID: 1755128295386668249}
   - component: {fileID: 1755128295360839581}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: MatchHistoryScrollView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7766,7 +7766,7 @@ GameObject:
   - component: {fileID: 421427497912990625}
   - component: {fileID: 2912616323240704267}
   m_Layer: 5
-  m_Name: Content
+  m_Name: MatchHistoryParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class GameRecordDisplayController : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class GameRecordDisplayController : MonoBehaviour
 	private PlayerRecordDisplayController recordPrefab;
 	[SerializeField]
 	private Transform recordParent;
+	[SerializeField]
+	private TextMeshProUGUI turnCount, date, totalTime;
 
 	public void Initialize(GameData game)
 	{
@@ -19,5 +22,8 @@ public class GameRecordDisplayController : MonoBehaviour
 			var record = Instantiate(recordPrefab, recordParent);
 			record.Initialize(game.Players[i]);
 		}
+		turnCount.text = $"Turnos: {game.TurnCount}";
+		date.text = $"Fecha: {game.MatchDate}";
+		totalTime.text = $"Duracion: {game.TimeInGame:m\\:ss}";
 	}
 }

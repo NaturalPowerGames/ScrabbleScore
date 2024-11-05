@@ -10,8 +10,9 @@ public class GameData
 	private Guid matchID;
 	public Guid MatchID => matchID;
 	[SerializeField]
-	private DateTime matchDate;
-	public DateTime MatchDate=> matchDate;
+	private string matchDate, endDate;
+	public DateTime MatchDate=> DateTime.Parse(matchDate);
+	public DateTime EndDate => DateTime.Parse(endDate);
 	[SerializeField]
 	private int timerMinutes, totalTime;
 	public int TimerMinutes 
@@ -26,22 +27,46 @@ public class GameData
 
 	public int PlayerAmount => players.Count;
 
-	public float TotalTime => totalTime;
+	public float TotalTime 
+	{
+		get
+		{
+			float seconds = (float) (MatchDate - EndDate).TotalSeconds;
+			return seconds;
+		}
+	}
+
+	public TimeSpan TimeInGame
+	{
+		get
+		{
+			return MatchDate - EndDate;
+		}
+	}
+
 	[SerializeField]
 	private List<PlayerData> players = new List<PlayerData>();
 
 	public List<PlayerData> Players => players;
 
+	public int TurnCount 
+	{
+		get
+		{
+			int totalTurns = players.Sum(player => player.Turns.Count);
+			return totalTurns;
+		}
+	}
 	public GameData()
 	{
 		matchID = Guid.NewGuid();
-		matchDate = DateTime.Now;
+		matchDate = DateTime.Now.ToString();
 	}
 
 	public GameData(GameData gameData)
 	{
 		matchID = Guid.NewGuid();
-		matchDate = DateTime.Now;
+		matchDate = gameData.matchDate;
 		TimerMinutes = gameData.TimerMinutes;
 		players = new List<PlayerData>(gameData.Players);
 		ResetPlayers();
@@ -100,5 +125,10 @@ public class GameData
 			scores[i] = new ScoreData(players[i].name, players[i].Score);
 		}
 		return scores.OrderByDescending(score => score.Score).ToArray();
+	}
+
+	public void OnGameEnded()
+	{
+		endDate = DateTime.Now.ToString();
 	}
 }

@@ -1,29 +1,31 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
 public class PlayerData
 {
-    public string name;
-    public TablePositions tableLocation;
+	public string name;
+	public TablePositions tableLocation;
 	[SerializeField]
-    private List<TurnData> turns = new List<TurnData>();
+	private List<TurnData> turns = new List<TurnData>();
+	public List<TurnData> Turns => turns;
 	[SerializeField]
 	private int differential;
 
-    public PlayerData(int index)
+	public PlayerData(int index)
 	{
-		name = $"Jugador {index+1}"; //localization?
+		name = $"Jugador {index + 1}"; //localization?
 	}
 
-    public override string ToString()
+	public override string ToString()
 	{
 		string info = $"Player name: {name}, Sitting at {tableLocation}, Current score: {Score}";
 		return info;
 	}
 
-    public int Score
+	public int Score
 	{
 		get
 		{
@@ -37,7 +39,7 @@ public class PlayerData
 		}
 	}
 
-	public float AverageTurnTime 
+	public float AverageTurnTime
 	{
 		get
 		{
@@ -50,9 +52,18 @@ public class PlayerData
 		}
 	}
 
+	public int Scrabbles
+	{
+		get
+		{
+			int count = turns.Count(t => t.Word.Length == 7);
+			return count;
+		}
+	}
+
 	public void AddTurn(string word, int score, float timeSpent)
 	{
-        turns.Add(new TurnData(word, score, timeSpent));
+		turns.Add(new TurnData(word, score, timeSpent));
 	}
 
 	public void ClearTurns()
