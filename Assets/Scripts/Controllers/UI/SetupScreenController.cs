@@ -8,6 +8,10 @@ public class SetupScreenController : UIController
     private TMP_Dropdown timeInput, playersInput;
     [SerializeField]
     private Button goToGameButton, inputPlayerNamesButton, goToDataScreenButton;
+	[SerializeField]
+	private Toggle useOnlineServicesToggle;
+	[SerializeField]
+	private TMP_InputField idInput;
 
 	public override void Toggle(bool active)
 	{
@@ -44,6 +48,12 @@ public class SetupScreenController : UIController
 		timeInput.onValueChanged.AddListener((x) =>
 		{
 			SetupEvents.OnMinutesPerTurnChangeRequested?.Invoke(int.Parse(timeInput.options[x].text));
+		});
+
+		useOnlineServicesToggle.onValueChanged.AddListener((x) =>
+		{
+			if (idInput.text == "") return;
+			SetupEvents.OnUseOnlineServicesChangeRequested?.Invoke(x, idInput.text);
 		});
 	}
 }

@@ -28,6 +28,7 @@ public class DataManager : MonoBehaviour
 		SetupEvents.OnMinutesPerTurnChangeRequested += OnMinutesPerTurnChangeRequested;
 		SetupEvents.OnPlayerNameChangeRequested += OnPlayerNameChangeRequested;
 		SetupEvents.OnPlayerTablePositionChangeRequested += OnPlayerTablePositionChangeRequested;
+		SetupEvents.OnUseOnlineServicesChangeRequested += OnUseOnlineServicesChangeRequested;
 		GameEvents.OnTurnStartRequested += OnTurnStartRequested;
 		GameEvents.OnTurnEnded += OnTurnEnded;
 		GameEvents.OnGameStartRequested += OnGameStartRequested;
@@ -44,6 +45,7 @@ public class DataManager : MonoBehaviour
 		SetupEvents.OnMinutesPerTurnChangeRequested -= OnMinutesPerTurnChangeRequested;
 		SetupEvents.OnPlayerNameChangeRequested -= OnPlayerNameChangeRequested;
 		SetupEvents.OnPlayerTablePositionChangeRequested -= OnPlayerTablePositionChangeRequested;
+		SetupEvents.OnUseOnlineServicesChangeRequested -= OnUseOnlineServicesChangeRequested;
 		GameEvents.OnTurnStartRequested -= OnTurnStartRequested;
 		GameEvents.OnTurnEnded -= OnTurnEnded;
 		GameEvents.OnGameStartRequested -= OnGameStartRequested;
@@ -52,6 +54,15 @@ public class DataManager : MonoBehaviour
 		GameEvents.OnGameResetRequested -= OnGameResetRequested;
 		DataEvents.OnSaveGameRequested -= OnSaveGameRequested;
 		DataEvents.OnLoadAllGamesForUserRequested -= OnLoadAllGamesForUserRequested;
+	}
+
+	private void OnUseOnlineServicesChangeRequested(bool active, string id)
+	{
+		useOnlineServices = active;
+		if (active)
+		{
+			playfab.LoginWithID(id);
+		}
 	}
 
 	private void OnLoadAllGamesForUserRequested(string user)

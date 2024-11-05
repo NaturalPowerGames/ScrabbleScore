@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Localization;
 
 public class GameRecordDisplayController : MonoBehaviour
 {
@@ -22,8 +23,9 @@ public class GameRecordDisplayController : MonoBehaviour
 			var record = Instantiate(recordPrefab, recordParent);
 			record.Initialize(game.Players[i]);
 		}
-		turnCount.text = $"Turnos: {game.TurnCount}";
-		date.text = $"Fecha: {game.MatchDate}";
-		totalTime.text = $"Duracion: {game.TimeInGame:m\\:ss}";
+
+		turnCount.text = $"{Constants.StringTable.GetLocalizedString("Turns")}: {game.TurnCount}";
+		date.text = $"{Constants.StringTable.GetLocalizedString("Date")}: {game.MatchDate}";
+		totalTime.text = $"{Constants.StringTable.GetLocalizedString("Duration")}: {game.TimeInGame:m\\:ss}";
 	}
 }

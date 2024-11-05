@@ -52,7 +52,7 @@ MonoBehaviour:
       type: {class: LocalizedAssetDatabase, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:
         m_DefaultTableReference:
-          m_TableCollectionName: 
+          m_TableCollectionName: EnglishAndSpanish
         m_CustomTableProvider:
           rid: -2
         m_CustomTablePostprocessor:
@@ -63,7 +63,7 @@ MonoBehaviour:
       type: {class: LocalizedStringDatabase, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:
         m_DefaultTableReference:
-          m_TableCollectionName: 
+          m_TableCollectionName: EnglishAndSpanish
         m_CustomTableProvider:
           rid: -2
         m_CustomTablePostprocessor:
@@ -130,7 +130,9 @@ MonoBehaviour:
     - rid: 3334685782573842503
       type: {class: PersistentVariablesSource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
-        m_Groups: []
+        m_Groups:
+        - name: global-sample
+          group: {fileID: 11400000, guid: 9ad0f902106b1ad498dd7edcab0117bc, type: 2}
     - rid: 3334685782573842504
       type: {class: DictionarySource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data: 

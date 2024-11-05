@@ -10,4 +10,5 @@ public static class SetupEvents
 	public static Action<int, TablePositions> OnPlayerTablePositionChangeRequested;
 	public static Action<PlayerData> OnPlayerInfoChangeRequested;
 	public static Action<PlayerData> OnPlayerInfoChanged;
+	public static Action<bool,string> OnUseOnlineServicesChangeRequested;
 }

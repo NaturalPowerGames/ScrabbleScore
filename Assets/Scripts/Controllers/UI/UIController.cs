@@ -5,7 +5,7 @@ public abstract class UIController : MonoBehaviour
 	[SerializeField]
 	protected GameObject background;
 
-    protected virtual void Awake()
+	protected virtual void Awake()
 	{
 		SetupButtons();
 		SetupInputs();
@@ -27,5 +27,5 @@ public abstract class UIController : MonoBehaviour
 	}
 	//protected abstract void ToggleEventSubscriptions(bool active); Do I wanna add this? it's pretty I guess
 	protected abstract void SetupButtons();
-	protected abstract void SetupInputs();	
+	protected abstract void SetupInputs();
 }

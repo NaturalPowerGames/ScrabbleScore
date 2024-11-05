@@ -10,44 +10,18 @@ public class PlayfabSaverLoader
 
     public PlayfabSaverLoader()
 	{
-#if UNITY_ANDROID
-        LoginWithDeviceID();
-#else
- // Create a random CustomID if one doesn't already exist
-        string customID = PlayerPrefs.GetString("PlayFabCustomID", System.Guid.NewGuid().ToString());
+    }
 
-        // Save CustomID so it persists for future sessions
-        PlayerPrefs.SetString("PlayFabCustomID", customID);
-
-        // Log in with the CustomID
+    public void LoginWithID(string id)
+    {
         var request = new LoginWithCustomIDRequest
         {
-            CustomId = customID,
+            CustomId = id,
             CreateAccount = true
         };
-
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
-#endif
     }
 
-    public void LoginWithDeviceID()
-    {
-#if UNITY_ANDROID
-        var request = new LoginWithAndroidDeviceIDRequest
-        {
-            AndroidDeviceId = SystemInfo.deviceUniqueIdentifier,
-            CreateAccount = true
-        };
-        PlayFabClientAPI.LoginWithAndroidDeviceID(request, OnLoginSuccess, OnLoginFailure);
-#elif UNITY_IOS
-    var request = new LoginWithIOSDeviceIDRequest
-    {
-        DeviceId = SystemInfo.deviceUniqueIdentifier,
-        CreateAccount = true
-    };
-    PlayFabClientAPI.LoginWithIOSDeviceID(request, OnLoginSuccess, OnLoginFailure);
-#endif
-    }
     public void UploadToPlayFab(GameData gameData)
     {
         // Convert this instance to JSON

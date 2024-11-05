@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: EnglishAndSpanish_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 8fdb694d181b69449919a79b5631d170, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 4862598537216
+    m_Localized: Minutes Per Turn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4982337527808
+    m_Localized: Amount of Players
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5043368845312
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5149019168768
+    m_Localized: Player Names
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6195913252864
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6426541252608
+    m_Localized: 'Time remaining:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6474305986560
+    m_Localized: Next Turn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6522519511040
+    m_Localized: Finish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6639406374912
+    m_Localized: Enter turn information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6741638340608
+    m_Localized: Word...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6797468721152
+    m_Localized: Score...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6953656213504
+    m_Localized: Are you sure you want to end the game?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7953871888384
+    m_Localized: Play Again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8017612726272
+    m_Localized: Setup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8069072642048
+    m_Localized: Add Diff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9254835937280
+    m_Localized: Player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9303036878848
+    m_Localized: Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9640330223616
+    m_Localized: Match History
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9725105496064
+    m_Localized: Load Matches
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9818730749952
+    m_Localized: Username...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12999611211776
+    m_Localized: Differential...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13506039865344
+    m_Localized: Player Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13694544470016
+    m_Localized: 'Table Position:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13812723179520
+    m_Localized: Enter name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13900505767936
+    m_Localized: North
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13910123307008
+    m_Localized: South
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13924815953920
+    m_Localized: East
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13931237433344
+    m_Localized: West
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17242011295744
+    m_Localized: Date
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20451333332992
+    m_Localized: Turns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21875186294784
+    m_Localized: Use online services?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27878208397312
+    m_Localized: Enter ID...
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

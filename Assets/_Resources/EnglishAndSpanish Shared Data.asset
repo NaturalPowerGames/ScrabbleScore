@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: EnglishAndSpanish Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: EnglishAndSpanish
+  m_TableCollectionNameGuidString: 8fdb694d181b69449919a79b5631d170
+  m_Entries:
+  - m_Id: 4862598537216
+    m_Key: Main/Canvas/BasicSetupScreen/Background/TimeInputTitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4982337527808
+    m_Key: Main/Canvas/BasicSetupScreen/Background/PlayersInputTitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5043368845312
+    m_Key: Main/Canvas/BasicSetupScreen/Background/GoToGameButton/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5149019168768
+    m_Key: Main/Canvas/BasicSetupScreen/Background/InputPlayerNamesButton/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6195913252864
+    m_Key: Main/Canvas/PlayersNameInputScreen/Background/GoToGameButtonPlayersNameInputScreen/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6426541252608
+    m_Key: Main/Canvas/GameScreen/Background/TimerTitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6474305986560
+    m_Key: Main/Canvas/GameScreen/Background/NextTurnButton/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6522519511040
+    m_Key: Main/Canvas/GameScreen/Background/EndGameButton/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6639406374912
+    m_Key: Main/Canvas/GameScreen/TurnInformationInputBackground/TurnInformationInputTitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6741638340608
+    m_Key: Main/Canvas/GameScreen/TurnInformationInputBackground/WordInputField/Text
+      Area/Placeholder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6797468721152
+    m_Key: Main/Canvas/GameScreen/TurnInformationInputBackground/PointsInputField/Text
+      Area/Placeholder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6953656213504
+    m_Key: Main/Canvas/GameScreen/EndGameConfirmationBackground/EndGameConfirmationTitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7953871888384
+    m_Key: Main/Canvas/EndGameScreen/Background/PlayAgainButton/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8017612726272
+    m_Key: Main/Canvas/EndGameScreen/Background/SetupAgainButton/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8069072642048
+    m_Key: Main/Canvas/EndGameScreen/Background/AddDifferentialPointsButton/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9254835937280
+    m_Key: Main/Canvas/EndGameScreen/Background/ScoreboardTitles/ScoreboardPlayerNameTitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9303036878848
+    m_Key: Main/Canvas/EndGameScreen/Background/ScoreboardTitles/ScoreboardPlayerScoreTitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9640330223616
+    m_Key: Main/Canvas/GameRecordsScreen/Background/MatchHistoryTitles/MatchHistoryExplanation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9725105496064
+    m_Key: Main/Canvas/GameRecordsScreen/Background/LoadGameRecordsForUserButton/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9818730749952
+    m_Key: Main/Canvas/GameRecordsScreen/Background/InputField (TMP)/Text Area/Placeholder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12999611211776
+    m_Key: DifferentialInput/Canvas (Environment)/DifferentialInput/InputField (TMP)/Text
+      Area/Placeholder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13506039865344
+    m_Key: PlayerNameInput/Canvas (Environment)/PlayerNameInput/PlayerNameInputTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13694544470016
+    m_Key: PlayerNameInput/Canvas (Environment)/PlayerNameInput/PositionOnTableInputTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13812723179520
+    m_Key: PlayerNameInput/Canvas (Environment)/PlayerNameInput/InputField (TMP)/Text
+      Area/Placeholder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13900505767936
+    m_Key: PlayerNameInput/Canvas (Environment)/PlayerNameInput/PositionOnTableInput
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13910123307008
+    m_Key: PlayerNameInput/Canvas (Environment)/PlayerNameInput/PositionOnTableInput
+      1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13924815953920
+    m_Key: PlayerNameInput/Canvas (Environment)/PlayerNameInput/PositionOnTableInput
+      2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13931237433344
+    m_Key: PlayerNameInput/Canvas (Environment)/PlayerNameInput/PositionOnTableInput
+      3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17242011295744
+    m_Key: Date
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20451333332992
+    m_Key: Turns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21875186294784
+    m_Key: Main/Canvas/BasicSetupScreen/Background/UseOnlineServicesToggle/Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27878208397312
+    m_Key: Main/Canvas/BasicSetupScreen/Background/LoginToPlayfabInput/Text Area/Placeholder
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3334685850434273595
+  references:
+    version: 2
+    RefIds:
+    - rid: 3334685850434273595
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1730815562829
