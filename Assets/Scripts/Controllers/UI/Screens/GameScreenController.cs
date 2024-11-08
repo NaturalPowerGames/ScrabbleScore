@@ -6,9 +6,9 @@ using System;
 public class GameScreenController : UIController
 {
 	[SerializeField]
-	private Button nextTurnButton, toggleTimerButton, endGameButton, endGameConfirmButton, endGameCancelButton;
+	private Button nextTurnButton, toggleTimerButton, endGameButton, endGameConfirmButton, endGameCancelButton, backButton, backToSetupConfirmButton, backToSetupCancelButton;
 	[SerializeField]
-	private GameObject turnInformationInputScreenParent, endGameConfirmationScreen;
+	private GameObject turnInformationInputScreenParent, endGameConfirmationScreen, backToSetupConfirmationScreen;
 	[SerializeField]
 	private TextMeshProUGUI timerDisplay, turnInfoDisplay;
 	[SerializeField]
@@ -32,6 +32,22 @@ public class GameScreenController : UIController
 		GameEvents.OnGameStarted -= OnGameStarted;
 	}
 
+	public override void Toggle(bool active)
+	{
+		base.Toggle(active);
+		if (!active)
+		{
+			TurnScreensOff();
+		}
+	}
+
+	private void TurnScreensOff()
+	{
+		turnInformationInputScreenParent.SetActive(false);
+		endGameConfirmationScreen.SetActive(false);
+		backToSetupConfirmationScreen.SetActive(false);
+	}
+
 	private void OnGameStarted(PlayerData[] players)
 	{
 		endGameConfirmationScreen.SetActive(false);
@@ -51,7 +67,9 @@ public class GameScreenController : UIController
 	private string FormatTurnInfo(PlayerData playerInfo, int turn)
 	{
 		string playerName = playerInfo.name;
-		return $"Juega: {playerName}, turno {turn}";
+		string plays = Constants.CurrentLanguage == Language.English ? "Playing: " : "Juega: ";
+		string turnText = Constants.CurrentLanguage == Language.English ? "Turn: " : "Turno: ";
+		return $"{plays} {playerName}, {turnText} {turn}";
 	}
 
 	protected override void SetupButtons()
@@ -83,6 +101,19 @@ public class GameScreenController : UIController
 		{
 			GameEvents.OnGameEndRequested?.Invoke();
 			UIEvents.OnScreenChangeRequested?.Invoke(Screens.EndGame);
+		});
+
+		backButton.onClick.AddListener(() =>
+		{
+			backToSetupConfirmationScreen.SetActive(true);
+		});
+		backToSetupConfirmButton.onClick.AddListener(() =>
+		{
+			GameEvents.OnGameResetRequested?.Invoke(true);
+		});
+		backToSetupCancelButton.onClick.AddListener(() =>
+		{
+			backToSetupConfirmationScreen.SetActive(false);
 		});
 	}
 

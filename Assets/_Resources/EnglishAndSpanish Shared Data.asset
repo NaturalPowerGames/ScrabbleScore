@@ -150,6 +150,22 @@ MonoBehaviour:
     m_Key: Main/Canvas/BasicSetupScreen/Background/LoginToPlayfabInput/Text Area/Placeholder
     m_Metadata:
       m_Items: []
+  - m_Id: 1062869826625536
+    m_Key: Main/Canvas/BasicSetupScreen/Background/LoginToPlayfabButton/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1096449105682432
+    m_Key: Main/Canvas/BasicSetupScreen/Background/ConnectedText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098765976297472
+    m_Key: Main/Canvas/GameScreen/BackToSetupConfirmationScreen/BackToSetupConfirmationTitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098870045368320
+    m_Key: Main/Canvas/GameScreen/Background/BackToSetupButton/Text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

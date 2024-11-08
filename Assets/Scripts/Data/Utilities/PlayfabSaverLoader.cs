@@ -82,6 +82,7 @@ public class PlayfabSaverLoader
 
     private void OnLoginSuccess(LoginResult result)
     {
+        SetupEvents.OnConnectedToOnlineServices?.Invoke();
         Debug.Log("Logged in successfully with CustomID!");
     }
 

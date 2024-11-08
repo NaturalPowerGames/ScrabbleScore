@@ -11,4 +11,5 @@ public static class SetupEvents
 	public static Action<PlayerData> OnPlayerInfoChangeRequested;
 	public static Action<PlayerData> OnPlayerInfoChanged;
 	public static Action<bool,string> OnUseOnlineServicesChangeRequested;
+	public static Action OnConnectedToOnlineServices;
 }

@@ -13,7 +13,7 @@ public class TurnInfoInputScreenController : MonoBehaviour
 	{
 		get
 		{
-			int score = 0;
+			int score;
 			int.TryParse(scoreInput.text, out score);
 			return score;
 		}
@@ -22,6 +22,27 @@ public class TurnInfoInputScreenController : MonoBehaviour
 	private void Awake()
 	{
 		SetupButtons();
+		SetupInputs();
+	}
+
+	private void SetupInputs()
+	{
+		wordInput.onSelect.AddListener((x) =>
+		{
+			UIEvents.OnInputFieldInteractionBegan?.Invoke(wordInput.GetComponent<RectTransform>());
+		});
+		wordInput.onDeselect.AddListener((x) =>
+		{
+			UIEvents.OnInputFieldInteractionEnded?.Invoke(wordInput.GetComponent<RectTransform>());
+		});
+		scoreInput.onSelect.AddListener((x) =>
+		{
+			UIEvents.OnInputFieldInteractionBegan?.Invoke(scoreInput.GetComponent<RectTransform>());
+		});
+		scoreInput.onDeselect.AddListener((x) =>
+		{
+			UIEvents.OnInputFieldInteractionEnded?.Invoke(scoreInput.GetComponent<RectTransform>());
+		});
 	}
 
 	private void OnEnable()

@@ -16,7 +16,7 @@ public class PlayerData
 
 	public PlayerData(int index)
 	{
-		name = $"Jugador {index + 1}"; //localization?
+		name = $"Num {index + 1}";
 	}
 
 	public override string ToString()

@@ -146,6 +146,22 @@ MonoBehaviour:
     m_Localized: Enter ID...
     m_Metadata:
       m_Items: []
+  - m_Id: 1062869826625536
+    m_Localized: Login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1096449105682432
+    m_Localized: Connected!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098765976297472
+    m_Localized: Back to Main Menu?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098870045368320
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

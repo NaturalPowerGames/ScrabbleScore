@@ -82,7 +82,7 @@ public class GameData
 	}
 
 	public void AddPlayerInfo(PlayerData playerData)
-	{
+	{		
 		players.Add(playerData);
 	}
 
@@ -93,6 +93,7 @@ public class GameData
 
 	public void UpdatePlayerInfo(int index, string name)
 	{
+		name = name.TrimEnd().ToLower();
 		players[index].name = name;
 	}
 

@@ -23,7 +23,14 @@ public class PlayerNameInputController : MonoBehaviour
 		{
 			SetupEvents.OnPlayerNameChangeRequested?.Invoke(index, x);
 		});
-
+		nameInput.onSelect.AddListener((x) =>
+		{
+			UIEvents.OnInputFieldInteractionBegan?.Invoke(nameInput.GetComponent<RectTransform>());
+		});
+		nameInput.onDeselect.AddListener((x) =>
+		{
+			UIEvents.OnInputFieldInteractionEnded?.Invoke(nameInput.GetComponent<RectTransform>());
+		});
 		tableLocation.onValueChanged.AddListener((x) =>
 		{
 			SetupEvents.OnPlayerTablePositionChangeRequested?.Invoke(index, (TablePositions)x);

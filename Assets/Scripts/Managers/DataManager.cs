@@ -67,6 +67,8 @@ public class DataManager : MonoBehaviour
 
 	private void OnLoadAllGamesForUserRequested(string user)
 	{
+		user = user.TrimEnd().ToLower();
+
 		if (useOnlineServices)
 		{
 			playfab.DownloadAllGameData(user);

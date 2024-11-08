@@ -146,6 +146,22 @@ MonoBehaviour:
     m_Localized: Usuario...
     m_Metadata:
       m_Items: []
+  - m_Id: 1062869826625536
+    m_Localized: Conectar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1096449105682432
+    m_Localized: Conectado!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098765976297472
+    m_Localized: Regresar al Menu Principal?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098870045368320
+    m_Localized: Volver
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

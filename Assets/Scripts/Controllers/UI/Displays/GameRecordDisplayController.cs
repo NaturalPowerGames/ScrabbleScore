@@ -18,6 +18,7 @@ public class GameRecordDisplayController : MonoBehaviour
 
 	private void DisplayRecords(GameData game)
 	{
+		recordParent.RemoveAllChildren();
 		for (int i = 0; i < game.PlayerAmount; i++)
 		{
 			var record = Instantiate(recordPrefab, recordParent);
